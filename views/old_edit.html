@@ -1,0 +1,11 @@
+  <form method="get" action="/edit/{{name}}">
+<br/><br/>ID:<input type="text" name="id" value="{{old[0]}}" readonly>
+<br/><br/>單字:<input type="text" name="name" value="{{old[1]}}" readonly>
+<br/><br/>詞性:<input type="text" name="ty" value="{{old[2]}}">
+<br/><br/>音標:<input type="text" name="pron" value="{{old[3]}}">
+<br/><br/>中文:<input type="text" name="ch" value="{{old[4]}}">
+<br/><br/>來源一:<input type="text" name="sc1" value="{{old[5]}}">
+<br/><br/>範例一:<input type="text" name="ex1" value="{{old[6]}}">
+<br/><br/><input type="submit" value="修改" name='save'>
+    <input type="button" value="放棄返回" onclick="javascript:location.href='http://scshao5923.com.tw/dict'">
+  </form>

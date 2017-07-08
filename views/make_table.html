@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://{{ip}}/js/jquery-3.2.1.js">
+</script>
+<script>
+$(document).ready(function(){
+  //alert('load...');
+  $(".pron").click(function(){
+	var nm=$(this).parent().siblings(".name").text();
+    $(this).parent().siblings(".spk").load('http://{{ip}}/webdict/pronounce/'+nm,function(responseTxt,statusTxt,xhr){
+      if(statusTxt=="error")
+        alert("Error: "+xhr.status+"\n: "+xhr.statusText+'\nresponseTxt: '+responseTxt);
+    })
+  })
+  $(".edit").click(function(){
+	var nm=$(this).parent().siblings(".name").text();
+	location.href = "http://{{ip}}/webdict/edit/"+nm
+  })
+  $(".del").click(function(){
+	var nm=$(this).parent().siblings(".name").text();
+	location.href = "http://{{ip}}/webdict/del/"+nm
+  })
+})
+</script>
+</head>
+<body>
+%#template to generate a HTML table from a list of tuples (or list of lists, or tuple of tuples or ...)
+<p>The open items are as follows:</p>
+<table border="1">
+%found=False
+%for row in rows:
+  %if not found:    
+<input type="button" value="返回" onclick="javascript:history.back()">
+    %found=True
+  %end
+  <tr>
+  %itm=0
+  %name=''
+  <td><button class='edit'>Edit</button><button class='del'>Delete</button></td>
+  %for col in row:
+	%itm=itm+1
+	%if itm==2: 
+    <td class='name'>{{col}}</td>
+	%end
+	%if itm==4:
+    <td>{{col}}<button class='pron' style="width:30px;height:30px;background-image:url('http://{{ip}}/jpg/speaker.jpg');"></button></td>
+	%end
+	%if not itm in (2,4):
+    <td>{{col}}</td>
+	%end
+  %end
+  <td class='spk'></td>
+  </tr>
+%end
+</table>
+<input type="button" value="返回" onclick="javascript:history.back()">
+</body>
+</html>
